@@ -1,6 +1,7 @@
 package text.model;
 
 import java.util.ArrayList;
+
 import text.model.Monster;
 import text.model.Item;
 import java.lang.Math;
@@ -16,6 +17,7 @@ public class TextAdventure
 	private Item inv5;
 	private int playerhealth;
 	
+	private ArrayList <Item> invList;
 	private Monster monster;
 	
 	public TextAdventure() 
@@ -28,6 +30,12 @@ public class TextAdventure
 		this.inv4 = new Item();
 		this.inv5 = new Item();
 		this.playerhealth = 100;
+		this.invList = new ArrayList <Item>();
+		invList.add(inv1);
+		invList.add(inv2);
+		invList.add(inv3);
+		invList.add(inv4);
+		invList.add(inv5);
 	}
 	
 	public String showInventory(String type)
@@ -39,26 +47,8 @@ public class TextAdventure
 	
 	public Item useInventory(int invNum)
 	{
-		Item inv = inv1;
 		
-		if (invNum == 2)
-		{
-			inv = inv2;
-		}
-		else if (invNum == 3)
-		{
-			inv = inv3;
-		}
-		else if (invNum == 4)
-		{
-			inv = inv4;
-		}
-		else if (invNum == 5)
-		{
-			inv = inv5;
-		}
-		
-		return inv;
+		return invList.get(invNum - 1);
 	}
 	
 	public String fight(String action, String monsterName, int monsterHealth, int monsterAttack)
