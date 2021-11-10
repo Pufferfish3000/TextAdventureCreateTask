@@ -1,6 +1,6 @@
 package text.model;
 
-import java.util.ArrayList;
+import java.util.*;
 
 import text.model.Monster;
 import text.model.Item;
@@ -51,6 +51,11 @@ public class TextAdventure
 		return invList.get(invNum - 1);
 	}
 	
+	public void giveItem(String ItemName, int stats)
+	{
+
+	}
+	
 	public String fight(String action, String monsterName, int monsterHealth, int monsterAttack)
 	{
 		String fightResult = "";
@@ -59,16 +64,25 @@ public class TextAdventure
 		monster.setattack(monsterAttack);
 		monster.sethealth(monsterHealth);
 		monster.setname(monsterName);
-				
-		if (action.equalsIgnoreCase("attack"))
+		while (playerhealth > 0 || monsterHealth > 0)
 		{
-			int crit = (int) (Math.random()*(2-1)) +1;
-			attack = crit * weapon;
-			monsterHealth = monsterHealth - attack;
-			monster.sethealth(monsterHealth);
+			System.out.println("Your health: " + playerhealth);
+			System.out.println("Monster health " + monsterHealth);
+			if (action.equalsIgnoreCase("attack"))
+			{
+				int crit = (int) (Math.random()*(2-1)) +1;
+				attack = crit * weapon;
+				System.out.println("You attack monster for " + attack + " damage!");
+				monsterHealth = monsterHealth - attack;
+				monster.sethealth(monsterHealth);
+			}
+			int monsterCrit = (int) (Math.random()*(2-1)) +1;
+			int monstAttack = monsterAttack * monsterCrit;
+			playerhealth = playerhealth - monstAttack;
+			System.out.println("Monster Attacks!");
+			System.out.println("You are hit for " + monstAttack + " damage!");
+			monsterAttack = monsterCrit * monsterAttack;
 		}
-		int monsterCrit = (int) (Math.random()*(2-1)) +1;
-		monsterAttack = monsterCrit * monsterAttack;
 		return fightResult;
 	}
 	
