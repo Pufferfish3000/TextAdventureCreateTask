@@ -9,7 +9,7 @@ public class Item
 	public Item()
 	{
 		this.stats = 0;
-		this.name = "Nothing"; 
+		this.name = "NOTHING"; 
 	}
 	
 	public void Item(String name, String description, int stats)
@@ -54,7 +54,7 @@ public class Item
 	public String toString()
 	{
 		String string = "";
-		string += name + ": " + description + "\nheals "+ stats + " damage";
+		string += name + ": " + description + "\nHeals "+ stats + " damage";
 		return string;
 	}
 

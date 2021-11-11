@@ -9,9 +9,9 @@ public class Controller
 	}
 	public void main()
 	{
-		String stickDescript = "medium sized branch taken off a tree";
-		game.giveWeapon("Stick", stickDescript, 15, 6);
-		game.giveItem("Apple", "Shiny Red Apple", 20);
+		game.giveWeapon("STICK", "medium sized branch taken off a tree", 15, 6.0);
+		game.giveItem("APPLE", "Shiny Red Apple", 10);
+		game.giveItem("SMALL POTION", "Small vial filled with a mysterious red liquid", 30);
 		game.fight("GOBLIN", 20, 10);
 		game.fight("GOBLIN ELDER", 50, 23);
 	}

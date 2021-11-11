@@ -5,17 +5,17 @@ public class Weapon
 	private String name;
 	private String description;
 	private int stats;
-	private int crit;
+	private double crit;
 	 
 	public Weapon()
 	{
 		this.name = "Nothing";
 		this.description = "";
 		this.stats = 0;
-		this.crit = 0;
+		this.crit = 0.0;
 	}
 	
-	public void Weapon(String name, String description, int stats, int crit)
+	public void Weapon(String name, String description, int stats, double crit)
 	{
 		this.name = name;
 		this.stats = stats;
@@ -38,7 +38,7 @@ public class Weapon
 		return this.stats;
 	}
 	
-	public int getCrit()
+	public double getCrit()
 	{
 		return this.crit;
 	}
@@ -58,9 +58,17 @@ public class Weapon
 		this.stats = stats;
 	}
 	
-	public void setCrit(int crit)
+	public void setCrit(double crit)
 	{
 		this.crit = crit;
+	}
+
+	@Override
+	public String toString()
+	{
+		String string = "";
+		string += name + ": " + description + "\nDamage: "+ stats + " damage \nCrit chance: " + (1/crit)*100 +"%";
+		return string;
 	}
 
 }
