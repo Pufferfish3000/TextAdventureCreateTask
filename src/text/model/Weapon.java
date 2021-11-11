@@ -1,22 +1,26 @@
 package text.model;
 
-public class Item 
+public class Weapon 
 {
 	private String name;
 	private String description;
 	private int stats;
+	private int crit;
 	 
-	public Item()
+	public Weapon()
 	{
+		this.name = "Nothing";
+		this.description = "";
 		this.stats = 0;
-		this.name = "Nothing"; 
+		this.crit = 0;
 	}
 	
-	public void Item(String name, String description, int stats)
+	public void Weapon(String name, String description, int stats, int crit)
 	{
 		this.name = name;
-		this.description = description;
 		this.stats = stats;
+		this.description = description;
+		this.crit = crit;
 	}
 	
 	public String getName()
@@ -34,6 +38,11 @@ public class Item
 		return this.stats;
 	}
 	
+	public int getCrit()
+	{
+		return this.crit;
+	}
+	
 	public void setName(String name)
 	{
 		this.name = name;
@@ -44,18 +53,14 @@ public class Item
 		this.description = description;
 	}
 	
-	
 	public void setStats(int stats)
 	{
 		this.stats = stats;
 	}
 	
-	@Override
-	public String toString()
+	public void setCrit(int crit)
 	{
-		String string = "";
-		string += name + ": " + description + "\nheals "+ stats + " damage";
-		return string;
+		this.crit = crit;
 	}
 
 }
