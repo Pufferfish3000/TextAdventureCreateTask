@@ -12,7 +12,7 @@ public class Item
 		this.name = "NOTHING"; 
 	}
 	
-	public void Item(String name, String description, int stats)
+	public Item(String name, String description, int stats)
 	{
 		this.name = name;
 		this.description = description;

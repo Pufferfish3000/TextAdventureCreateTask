@@ -21,6 +21,9 @@ public class TextAdventure
 	private Scanner input;
 	private Thread thread;
 	private ArrayList <Item> invList;
+	private ArrayList <Item> lowItem;
+	private ArrayList <Item> highItem;
+	private int playerPosition[];
 	private String map [] [];
 	
 	public TextAdventure() 
@@ -34,13 +37,27 @@ public class TextAdventure
 		this.inv5 = new Item();
 		this.playerhealth = 100;
 		this.invList = new ArrayList <Item>();
-		this.map = new String[10] [7];
+		this.playerPosition = new int[2];
+		this.map = new String[][]{
+			  { "▫", "▫", "▫", "▫", "▫", "▫", "▫" },
+			  { "▫", "▫", "▫", "▫", "▫", "C", "▫" },
+			  { "▫", "V", "▫", "▫", "▫", "▫", "▫" },
+			  { "▫", "▫", "▫", "▫", "▫", "▫", "▫" },
+			  { "▫", "▫", "▫", "▫", "▫", "▫", "▫" },
+			  { "▫", "▫", "▫", "▫", "▫", "▫", "▫" },
+			  { "▫", "▫", "▫", "▫", "G", "▫", "▫" },
+			  { "L", "▫", "▫", "▫", "▫", "▫", "▫" },
+			  { "▫", "▫", "▫", "▫", "▫", "▫", "▫" },
+			  { "▫", "▫", "▫", "▫", "▫", "▫", "D" },
+			};
 		input = new Scanner(System.in);
 		invList.add(inv1);
 		invList.add(inv2);
 		invList.add(inv3);
 		invList.add(inv4);
 		invList.add(inv5);
+		playerPosition [0] = 0;
+		playerPosition [1] = 0;
 	}
 	
 	public boolean showInventory()
@@ -84,15 +101,48 @@ public class TextAdventure
 		return goBack;
 	}
 	
-	public void map()
+	public void showMap()
 	{
-		System.out.println("▫ ▫ ▫ ▫ ▫ ▫ ▫ L ▫ ▫");
-		System.out.println("▫ ● ▫ ▫ ▫ ▫ ▫ ▫ ▫ ▫");
-		System.out.println("▫ V ▫ ▫ ▫ ▫ ▫ ▫ ▫ ▫");
-		System.out.println("▫ ▫ ▫ ▫ ▫ ▫ G ▫ ▫ ▫");
-		System.out.println("▫ ▫ ▫ ▫ ▫ ▫ ▫ ▫ ▫ ▫");
-		System.out.println("▫ ▫ C ▫ ▫ ▫ ▫ ▫ ▫ ▫");
-		System.out.println("▫ ▫ ▫ ▫ ▫ ▫ ▫ ▫ ▫ D");
+		for(int col=0; col<map[0].length; col++)
+		{
+		   for(int row=0; row<map.length; row++)
+		   {
+			  System.out.print(map[row] [col]);
+			  System.out.print(" ");
+		   }
+		   System.out.println();
+		}
+	}
+	
+	public void playerMove(int direction)
+	{
+		
+	}
+	
+	public int lootChance(int chance)
+	{
+		int r = (int) (Math.random() * (100 - 1)) + 1;
+		r = r % chance;
+		return r;
+	}
+	
+	public Item smallLoot()
+	{
+		Item loot;
+		
+		Item apple = new Item("APPLE", "Shiny Red Apple", 10);
+		Item bread = new Item("BREAD", "Loaf of slightly stale bread", 10);
+		Item cheese = new Item("CHEESE", "Chunck of yellow cheese", 15);
+		
+		lowItem.add(apple);
+		lowItem.add(bread);
+		lowItem.add(cheese);
+		
+		int chance = lootChance(3);
+		
+		loot = lowItem.get(chance - 1);
+		
+		return loot;
 	}
 	
 	public boolean useInv()
