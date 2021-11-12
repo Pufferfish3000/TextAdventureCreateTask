@@ -14,5 +14,6 @@ public class Controller
 		game.giveItem("SMALL POTION", "Small vial filled with a mysterious red liquid", 30);
 		game.fight("GOBLIN", 20, 10);
 		game.fight("GOBLIN ELDER", 50, 23);
+		game.map();
 	}
 }

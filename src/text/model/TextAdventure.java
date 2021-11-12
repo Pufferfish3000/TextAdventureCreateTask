@@ -21,6 +21,7 @@ public class TextAdventure
 	private Scanner input;
 	private Thread thread;
 	private ArrayList <Item> invList;
+	private String map [] [];
 	
 	public TextAdventure() 
 	{
@@ -33,6 +34,7 @@ public class TextAdventure
 		this.inv5 = new Item();
 		this.playerhealth = 100;
 		this.invList = new ArrayList <Item>();
+		this.map = new String[10] [7];
 		input = new Scanner(System.in);
 		invList.add(inv1);
 		invList.add(inv2);
@@ -80,6 +82,17 @@ public class TextAdventure
 			}
 		}
 		return goBack;
+	}
+	
+	public void map()
+	{
+		System.out.println("▫ ▫ ▫ ▫ ▫ ▫ ▫ L ▫ ▫");
+		System.out.println("▫ ● ▫ ▫ ▫ ▫ ▫ ▫ ▫ ▫");
+		System.out.println("▫ V ▫ ▫ ▫ ▫ ▫ ▫ ▫ ▫");
+		System.out.println("▫ ▫ ▫ ▫ ▫ ▫ G ▫ ▫ ▫");
+		System.out.println("▫ ▫ ▫ ▫ ▫ ▫ ▫ ▫ ▫ ▫");
+		System.out.println("▫ ▫ C ▫ ▫ ▫ ▫ ▫ ▫ ▫");
+		System.out.println("▫ ▫ ▫ ▫ ▫ ▫ ▫ ▫ ▫ D");
 	}
 	
 	public boolean useInv()
