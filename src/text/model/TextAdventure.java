@@ -60,6 +60,33 @@ public class TextAdventure
 		playerPosition [1] = 0;
 	}
 	
+	public void monsterLoot(boolean isBig)
+	{
+		boolean isWeapon = false;
+		
+		if (gameRandom(3) == 0)
+		{
+			isWeapon = true;
+		}
+		
+		if (isBig && isWeapon);
+		{
+			
+		}
+		if (isBig)
+		{
+			bigLoot();	
+		}
+		else if (isWeapon)
+		{
+			
+		}
+		else
+		{
+			smallLoot();
+		}
+	}
+	
 	public boolean showInventory()
 	{
 		Item _inv1 = invList.get(0);
@@ -119,14 +146,14 @@ public class TextAdventure
 		
 	}
 	
-	public int lootChance(int chance)
+	public int gameRandom(int chance)
 	{
 		int r = (int) (Math.random() * (100 - 1)) + 1;
 		r = r % chance;
 		return r;
 	}
 	
-	public Item smallLoot()
+	public void smallLoot()
 	{
 		Item loot;
 		
@@ -138,11 +165,31 @@ public class TextAdventure
 		lowItem.add(bread);
 		lowItem.add(cheese);
 		
-		int chance = lootChance(3);
+		int chance = gameRandom(3);
 		
 		loot = lowItem.get(chance - 1);
 		
-		return loot;
+		giveItem(loot);
+	}
+	
+	public void bigLoot()
+	{
+		Item loot;
+		
+		Item apple = new Item("APPLE", "Shiny Red Apple", 10);
+		Item bread = new Item("BREAD", "Loaf of slightly stale bread", 10);
+		Item cheese = new Item("CHEESE", "Chunck of yellow cheese", 15);
+		
+		lowItem.add(apple);
+		lowItem.add(bread);
+		lowItem.add(cheese);
+		
+		int chance = gameRandom(3);
+		
+		loot = lowItem.get(chance - 1);
+		
+		giveItem(loot);
+		
 	}
 	
 	public boolean useInv()
@@ -223,6 +270,30 @@ public class TextAdventure
 		}
 	}
 	
+	public void giveItem(Item givenItem)
+	{
+		Item newItem = givenItem;
+		boolean isFull = true;
+		int i = 0;
+		
+		while (i < 6)
+		{
+			Item currentItem = invList.get(i);
+			if (currentItem.getName().equalsIgnoreCase("nothing"))
+			{
+				invList.set(i, newItem);
+				isFull = false;
+				i = i + 10;
+			}
+			i++;
+			
+		}
+		if (isFull == true)
+		{
+			System.out.println("INVENTORY FULL");
+		}
+	}
+	
 	public boolean didCrit(double critChance)
 	{
 		boolean hasCrit = false;
@@ -268,12 +339,12 @@ public class TextAdventure
 		return monstAttack;
 	}
 	
-	public boolean fight(String monsterName, int monsterHealth, int monsterAttack)
+	public boolean fight(String monsterName, int monsterHealth, int monsterAttack, boolean monstBig)
 	{
 		boolean fight = false;
 		double critChance = currentWeapon.getCrit();
 		boolean actionTaken;
-		Monster monster = new Monster(monsterName, monsterHealth, monsterAttack);
+		Monster monster = new Monster(monsterName, monsterHealth, monsterAttack, monstBig);
 		System.out.println(monsterName + " Goes in to fight!");
 		System.out.println("Your health: " + playerhealth);
 		System.out.println(monsterName + " health: " + monsterHealth);
@@ -317,6 +388,14 @@ public class TextAdventure
 		if (monsterHealth < 0)
 		{
 			System.out.println(monsterName + " DIES");
+			if(monstBig)
+			{
+				bigLoot();
+			}
+			else
+			{
+				smallLoot();
+			}
 		}
 		else
 		{

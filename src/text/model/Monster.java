@@ -5,17 +5,24 @@ public class Monster
 	private String name;
 	private int attack;
 	private int health;
-
-	public Monster(String name, int health, int attack)
+	private boolean isBig;
+	
+	public Monster(String name, int health, int attack, boolean isBig)
 	{
 		this.name = name;
 		this.health = health;
 		this.attack = attack;
+		this.isBig = isBig;
 	}
 	
 	public String getName()
 	{
 		return this.name;
+	}
+	
+	public boolean getIsBig()
+	{
+		return this.isBig;
 	}
 	
 	public int gethealth()
@@ -42,5 +49,9 @@ public class Monster
 	{
 		this.health = health;
 	}
-
+	
+	public void setIsBig(boolean isBig)
+	{
+		this.isBig = isBig;
+	}
 }
