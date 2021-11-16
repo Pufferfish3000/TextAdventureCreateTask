@@ -71,7 +71,7 @@ public class TextAdventure
 		
 		if (isBig && isWeapon);
 		{
-			
+			bigWeapon();
 		}
 		if (isBig)
 		{
@@ -79,7 +79,7 @@ public class TextAdventure
 		}
 		else if (isWeapon)
 		{
-			
+			smallWeapon();
 		}
 		else
 		{
@@ -176,13 +176,53 @@ public class TextAdventure
 	{
 		Item loot;
 		
-		Item apple = new Item("APPLE", "Shiny Red Apple", 10);
-		Item bread = new Item("BREAD", "Loaf of slightly stale bread", 10);
-		Item cheese = new Item("CHEESE", "Chunck of yellow cheese", 15);
+		Item weakPotion = new Item("WEAK POTION", "Small vial filled with glowing red liquid", 30);
+		Item goodPotion = new Item("GOOD POTION", "Small vial filled with glowing green liquid", 60);
+		Item strongPotion = new Item("STRONG POTION", "Small vial filled with glowing blue liquid", 100);
 		
-		lowItem.add(apple);
-		lowItem.add(bread);
-		lowItem.add(cheese);
+		lowItem.add(weakPotion);
+		lowItem.add(goodPotion);
+		lowItem.add(strongPotion);
+		
+		int chance = gameRandom(3);
+		
+		loot = lowItem.get(chance - 1);
+		
+		giveItem(loot);
+		
+	}
+	
+	public void bigWeapon()
+	{
+		Item loot;
+		
+		Item titanium = new Item("TITANIUM BLADE", "Strongest sword made by man", 50);
+		Item fiery = new Item("FIRERY SWORD", "Found in the depths of the hotest volcano", 60);
+		Item damned = new Item("SWORD OF THE DAMNED", "Forged in the depths of hell, this sword sucks the soul out of its victims", 70);
+		
+		lowItem.add(titanium);
+		lowItem.add(fiery);
+		lowItem.add(damned);
+		
+		int chance = gameRandom(3);
+		
+		loot = lowItem.get(chance - 1);
+		
+		giveItem(loot);
+		
+	}
+	
+	public void smallWeapon()
+	{
+		Item loot;
+		
+		Item club = new Item("CLUB", "Stick, but big", 17);
+		Item rustKnife = new Item("RUSTY KNIFE", "Pairs well with a tetanus shot", 20);
+		Item brokeSword = new Item("BROKEN SWORD", "This piece of steel had a hard life", 23);
+		
+		lowItem.add(club);
+		lowItem.add(rustKnife);
+		lowItem.add(brokeSword);
 		
 		int chance = gameRandom(3);
 		
