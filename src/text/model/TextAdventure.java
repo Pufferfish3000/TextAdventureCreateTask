@@ -23,6 +23,8 @@ public class TextAdventure
 	private ArrayList <Item> invList;
 	private ArrayList <Item> lowItem;
 	private ArrayList <Item> highItem;
+	private ArrayList <Weapon> highWeap;
+	private ArrayList <Weapon> lowWeap;
 	private int playerPosition[];
 	private String map [] [];
 	
@@ -180,9 +182,9 @@ public class TextAdventure
 		Item goodPotion = new Item("GOOD POTION", "Small vial filled with glowing green liquid", 60);
 		Item strongPotion = new Item("STRONG POTION", "Small vial filled with glowing blue liquid", 100);
 		
-		lowItem.add(weakPotion);
-		lowItem.add(goodPotion);
-		lowItem.add(strongPotion);
+		highItem.add(weakPotion);
+		highItem.add(goodPotion);
+		highItem.add(strongPotion);
 		
 		int chance = gameRandom(3);
 		
@@ -194,41 +196,42 @@ public class TextAdventure
 	
 	public void bigWeapon()
 	{
-		Item loot;
+		Weapon loot;
 		
-		Item titanium = new Item("TITANIUM BLADE", "Strongest sword made by man", 50);
-		Item fiery = new Item("FIRERY SWORD", "Found in the depths of the hotest volcano", 60);
-		Item damned = new Item("SWORD OF THE DAMNED", "Forged in the depths of hell, this sword sucks the soul out of its victims", 70);
+		Weapon titanium = new Weapon("TITANIUM BLADE", "Strongest sword made by man", 50,12.0);
+		Weapon fiery = new Weapon("FIRERY SWORD", "Found in the depths of the hotest volcano", 60, 12.0);
+		Weapon damned = new Weapon("SWORD OF THE DAMNED", "Forged in the depths of hell, this sword sucks the soul out of its victims", 70, 12.0);
 		
-		lowItem.add(titanium);
-		lowItem.add(fiery);
-		lowItem.add(damned);
+		highWeap.add(titanium);
+		
+		highWeap.add(fiery);
+		highWeap.add(damned);
 		
 		int chance = gameRandom(3);
 		
 		loot = lowItem.get(chance - 1);
 		
-		giveItem(loot);
+		//giveItem(loot);
 		
 	}
 	
 	public void smallWeapon()
 	{
-		Item loot;
+		Weapon loot;
 		
-		Item club = new Item("CLUB", "Stick, but big", 17);
-		Item rustKnife = new Item("RUSTY KNIFE", "Pairs well with a tetanus shot", 20);
-		Item brokeSword = new Item("BROKEN SWORD", "This piece of steel had a hard life", 23);
+		Weapon club = new Weapon("CLUB", "Stick, but big", 17, 12.0);
+		Weapon rustKnife = new Weapon("RUSTY KNIFE", "Pairs well with a tetanus shot", 20, 12.0);
+		Weapon brokeSword = new Weapon("BROKEN SWORD", "This piece of steel had a hard life", 23, 12.0);
 		
-		lowItem.add(club);
-		lowItem.add(rustKnife);
-		lowItem.add(brokeSword);
+		lowWeap.add(club);
+		lowWeap.add(rustKnife);
+		lowWeap.add(brokeSword);
 		
 		int chance = gameRandom(3);
 		
-		loot = lowItem.get(chance - 1);
+		loot = lowWeap.get(chance - 1);
 		
-		giveItem(loot);
+		//giveWeapon(loot);
 		
 	}
 	

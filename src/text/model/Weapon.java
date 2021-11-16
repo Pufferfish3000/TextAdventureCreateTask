@@ -15,7 +15,7 @@ public class Weapon
 		this.crit = 0.0;
 	}
 	
-	public void Weapon(String name, String description, int stats, double crit)
+	public Weapon(String name, String description, int stats, double crit)
 	{
 		this.name = name;
 		this.stats = stats;
