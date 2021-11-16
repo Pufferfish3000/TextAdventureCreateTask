@@ -209,7 +209,7 @@ public class TextAdventure
 		
 		int chance = gameRandom(3);
 		
-		loot = lowItem.get(chance - 1);
+		loot = highWeap.get(chance - 1);
 		
 		//giveItem(loot);
 		
