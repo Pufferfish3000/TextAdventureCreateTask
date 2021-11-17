@@ -11,7 +11,6 @@ import java.util.concurrent.TimeUnit;
 public class TextAdventure 
 {
 	private Weapon currentWeapon;
-	private Weapon newWeapon;
 	private Item inv1;
 	private Item inv2;
 	private Item inv3;
@@ -31,7 +30,6 @@ public class TextAdventure
 	public TextAdventure() 
 	{
 		this.currentWeapon = new Weapon();
-		this.newWeapon = new Weapon();
 		this.inv1 = new Item();
 		this.inv2 = new Item();
 		this.inv3 = new Item();
@@ -285,6 +283,11 @@ public class TextAdventure
 		currentWeapon.setName(ItemName);
 		currentWeapon.setCrit(crit);
 		currentWeapon.setDescription(description);
+	}
+	
+	public void giveWeapon(Weapon newWeapon)
+	{
+		currentWeapon = newWeapon;
 	}
 	
 	public void giveItem(String ItemName, String description, int stats)
