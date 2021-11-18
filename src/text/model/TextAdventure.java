@@ -141,9 +141,76 @@ public class TextAdventure
 		}
 	}
 	
-	public void playerMove(int direction)
+	public void playerMove()
+	{
+		System.out.println("[MOVEMENT]");
+		if (canMoveUp())
+		{
+			System.out.print("{1} ↑ ");
+		}
+		if (canMoveDown())
+		{
+			System.out.print("{2} ↓ ");
+		}
+		if (canMoveLeft())
+		{
+			System.out.print("{3} ← ");
+		}
+		if (canMoveRight())
+		{
+			System.out.print("{4} → ");
+		}
+		
+		System.out.println("[ACTIONS]");
+		System.out.println("{5} show inv  {6} camp");
+		
+		int choice = input.nextInt();
+	}
+	
+	public void playerCamp() 
+	{
+		playerhealth = 100;
+	}
+	
+	public boolean canMoveUp()
 	{
 		
+		if (playerPosition[1] != 0)
+		{
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public boolean canMoveDown()
+	{	
+		if (playerPosition[1] != 6)
+		{
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public boolean canMoveLeft()
+	{		
+		if (playerPosition[0] != 0)
+		{
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public boolean canMoveRight()
+	{
+		if (playerPosition[0] != 9)
+		{
+			return true;
+		}
+		
+		return false;
 	}
 	
 	public int gameRandom(int chance)

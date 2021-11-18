@@ -15,5 +15,6 @@ public class Controller
 //		game.fight("GOBLIN", 20, 10);
 //		game.fight("GOBLIN ELDER", 50, 23);
 		game.showMap();
+		game.playerMove();
 	}
 }
