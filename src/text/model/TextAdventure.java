@@ -165,6 +165,46 @@ public class TextAdventure
 		System.out.println("{5} show inv  {6} camp");
 		
 		int choice = input.nextInt();
+		boolean correctInput = true;
+		
+		while (correctInput)
+		{
+			if (choice == 1 && canMoveUp())
+			{
+				moveUp();
+				correctInput = false;
+			}
+			else if (choice == 2 && canMoveDown())
+			{
+				moveDown();
+				correctInput = false;
+			}
+			else if (choice == 3 && canMoveLeft())
+			{
+				moveLeft();
+				correctInput = false;
+			}
+			else if (choice == 4 && canMoveRight())
+			{
+				moveRight();
+				correctInput = false;
+			}
+			else if (choice == 5)
+			{
+				showInventory();
+				correctInput = false;
+				
+			}
+			else if(choice == 6)
+			{
+				playerCamp();
+				correctInput = false;
+			}
+			else
+			{
+				System.out.println("INVAALID INPUT, PLEASE CHOOSE FROM THE AVAILABLE OPTIONS");
+			}
+		}
 	}
 	
 	public void playerCamp() 
@@ -213,6 +253,25 @@ public class TextAdventure
 		return false;
 	}
 	
+	public void moveRight()
+	{
+		
+	}
+
+	public void moveLeft()
+	{
+		
+	}
+	
+	public void moveUp()
+	{
+		
+	}
+	
+	public void moveDown()
+	{
+		
+	}
 	public int gameRandom(int chance)
 	{
 		int r = (int) (Math.random() * (100 - 1)) + 1;
