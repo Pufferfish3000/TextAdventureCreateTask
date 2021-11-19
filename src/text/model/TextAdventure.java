@@ -39,16 +39,16 @@ public class TextAdventure
 		this.invList = new ArrayList <Item>();
 		this.playerPosition = new int[2];
 		this.map = new String[][]{
-			  { "▫", "▫", "▫", "▫", "▫", "▫", "▫" },
-			  { "▫", "▫", "▫", "▫", "▫", "C", "▫" },
-			  { "▫", "V", "▫", "▫", "▫", "▫", "▫" },
-			  { "▫", "▫", "▫", "▫", "▫", "▫", "▫" },
-			  { "▫", "▫", "▫", "▫", "▫", "▫", "▫" },
-			  { "▫", "▫", "▫", "▫", "▫", "▫", "▫" },
-			  { "▫", "▫", "▫", "▫", "G", "▫", "▫" },
-			  { "L", "▫", "▫", "▫", "▫", "▫", "▫" },
-			  { "▫", "▫", "▫", "▫", "▫", "▫", "▫" },
-			  { "▫", "▫", "▫", "▫", "▫", "▫", "D" },
+			  { "●", "▫", "▫", "▫", "▫", "▫", "▫", "▫", "▫", "▫" },
+			  { "▫", "▫", "▫", "▫", "▫", "▫", "▫", "▫", "▫", "▫" },
+			  { "▫", "▫", "▫", "▫", "▫", "▫", "▫", "▫", "▫", "▫" },
+			  { "▫", "▫", "▫", "▫", "▫", "▫", "▫", "▫", "▫", "▫" },
+			  { "▫", "▫", "▫", "▫", "▫", "▫", "▫", "▫", "▫", "▫" },
+			  { "▫", "▫", "▫", "▫", "▫", "▫", "▫", "▫", "▫", "▫" },
+			  { "▫", "▫", "▫", "▫", "▫", "▫", "▫", "▫", "▫", "▫" },
+			  { "▫", "▫", "▫", "▫", "▫", "▫", "▫", "▫", "▫", "▫" },
+			  { "▫", "▫", "▫", "▫", "▫", "▫", "▫", "▫", "▫", "▫" },
+			  { "▫", "▫", "▫", "▫", "▫", "▫", "▫", "▫", "▫", "▫" },
 			};
 		input = new Scanner(System.in);
 		invList.add(inv1);
@@ -143,6 +143,8 @@ public class TextAdventure
 	
 	public void playerMove()
 	{
+		showMap();
+		
 		System.out.println("[MOVEMENT]");
 		if (canMoveUp())
 		{
@@ -164,11 +166,12 @@ public class TextAdventure
 		System.out.println("[ACTIONS]");
 		System.out.println("{5} show inv  {6} camp");
 		
-		int choice = input.nextInt();
 		boolean correctInput = true;
 		
 		while (correctInput)
 		{
+			int choice = input.nextInt();
+			
 			if (choice == 1 && canMoveUp())
 			{
 				moveUp();
@@ -253,24 +256,85 @@ public class TextAdventure
 		return false;
 	}
 	
-	public void moveRight()
+	public void moveDown()
 	{
 		
+		int x = playerPosition[0];
+		int y = playerPosition[1];
+		
+		if (map[x][y].equals("●"))
+		{
+			map[x] [y] = "▫";
+		}
+				
+		y = playerPosition[1] + 1;
+		
+		if (map[x][y].equals("▫"))
+		{
+			map[x] [y] = "●";
+		}
+		
+		playerPosition[1] = y;
 	}
 
 	public void moveLeft()
 	{
+		int x = playerPosition[0];
+		int y = playerPosition[1];
 		
+		if (map[x][y].equals("●"))
+		{
+			map[x] [y] = "▫";
+		}
+				
+		x = playerPosition[0] - 1;
+		
+		if (map[x][y].equals("▫"))
+		{
+			map[x] [y] = "●";
+		}
+		
+		playerPosition[0] = x;
 	}
 	
 	public void moveUp()
 	{
+		int x = playerPosition[0];
+		int y = playerPosition[1];
 		
+		if (map[x][y].equals("●"))
+		{
+			map[x] [y] = "▫";
+		}
+				
+		y = playerPosition[1] - 1;
+		
+		if (map[x][y].equals("▫"))
+		{
+			map[x] [y] = "●";
+		}
+		
+		playerPosition[1] = y;
 	}
 	
-	public void moveDown()
+	public void moveRight()
 	{
+		int x = playerPosition[0];
+		int y = playerPosition[1];
 		
+		if (map[x][y].equals("●"))
+		{
+			map[x] [y] = "▫";
+		}
+				
+		x = playerPosition[0] + 1;
+		
+		if (map[x][y].equals("▫"))
+		{
+			map[x][y] = "●";
+		}
+		
+		playerPosition[1] = y;
 	}
 	public int gameRandom(int chance)
 	{
