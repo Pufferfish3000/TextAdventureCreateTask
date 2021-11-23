@@ -24,8 +24,10 @@ public class TextAdventure
 	private ArrayList <Item> highItem;
 	private ArrayList <Weapon> highWeap;
 	private ArrayList <Weapon> lowWeap;
+	private ArrayList <Monster> monstList;
 	private int playerPosition[];
 	private String map [] [];
+	private boolean gameRunning = true; 
 	
 	public TextAdventure() 
 	{
@@ -48,7 +50,7 @@ public class TextAdventure
 			  { "▫", "▫", "▫", "▫", "▫", "▫", "▫", "▫", "▫", "▫" },
 			  { "▫", "▫", "▫", "▫", "▫", "▫", "▫", "▫", "▫", "▫" },
 			  { "▫", "▫", "▫", "▫", "▫", "▫", "▫", "▫", "▫", "▫" },
-			  { "▫", "▫", "▫", "▫", "▫", "▫", "▫", "▫", "▫", "▫" },
+			  { "▫", "▫", "▫", "▫", "▫", "▫", "▫", "▫", "▫", "D" },
 			};
 		input = new Scanner(System.in);
 		invList.add(inv1);
@@ -58,6 +60,12 @@ public class TextAdventure
 		invList.add(inv5);
 		playerPosition [0] = 0;
 		playerPosition [1] = 0;
+		monstList = new ArrayList<Monster> ();
+		lowItem = new ArrayList<Item> ();
+		highItem = new ArrayList<Item> ();
+		lowWeap = new ArrayList<Weapon> ();
+		highWeap = new ArrayList<Weapon> ();
+		this.gameRunning = gameRunning;
 	}
 	
 	public void monsterLoot(boolean isBig)
@@ -275,6 +283,7 @@ public class TextAdventure
 		}
 		
 		playerPosition[1] = y;
+		playerPosition[0] = x;
 	}
 
 	public void moveLeft()
@@ -287,13 +296,14 @@ public class TextAdventure
 			map[x] [y] = "▫";
 		}
 				
-		x = playerPosition[0] - 1;
+		x = x - 1;
 		
 		if (map[x][y].equals("▫"))
 		{
 			map[x] [y] = "●";
 		}
 		
+		playerPosition[1] = y;
 		playerPosition[0] = x;
 	}
 	
@@ -315,6 +325,7 @@ public class TextAdventure
 		}
 		
 		playerPosition[1] = y;
+		playerPosition[0] = x;
 	}
 	
 	public void moveRight()
@@ -327,7 +338,7 @@ public class TextAdventure
 			map[x] [y] = "▫";
 		}
 				
-		x = playerPosition[0] + 1;
+		x = x + 1;
 		
 		if (map[x][y].equals("▫"))
 		{
@@ -335,7 +346,9 @@ public class TextAdventure
 		}
 		
 		playerPosition[1] = y;
+		playerPosition[0] = x;;
 	}
+	
 	public int gameRandom(int chance)
 	{
 		int r = (int) (Math.random() * (100 - 1)) + 1;
@@ -477,7 +490,30 @@ public class TextAdventure
 	
 	public void giveWeapon(Weapon newWeapon)
 	{
-		currentWeapon = newWeapon;
+		boolean correctInput = true;
+		System.out.println("DO YOU WISH TO REPLACE YOUR CURRENT WEAPON?");
+		System.out.println("CURRENT WEAPON: " + currentWeapon.toString());
+		System.out.println("NEW WEAPON: " + newWeapon.toString());
+		System.out.println("{1} YES  {2} NO");
+		while (correctInput)
+		{
+			int choice = input.nextInt();
+			if (choice == 1)
+			{
+				System.out.println("USING NEW WEAPON");
+				currentWeapon = newWeapon;
+				correctInput = false;
+			}
+			else if (choice == 2)
+			{
+				System.out.println("KEEPING CURRENT WEAPON");
+				correctInput = false;
+			}
+			else
+			{
+				System.out.println("INVALID INPUT PLEASE TRY AGAIN");
+			}
+		}
 	}
 	
 	public void giveItem(String ItemName, String description, int stats)
@@ -508,6 +544,11 @@ public class TextAdventure
 	
 	public void giveItem(Item givenItem)
 	{
+		Item _inv1 = invList.get(0);
+		Item _inv2 = invList.get(1);
+		Item _inv3 = invList.get(2);
+		Item _inv4 = invList.get(3);
+		Item _inv5 = invList.get(4);
 		Item newItem = givenItem;
 		boolean isFull = true;
 		int i = 0;
@@ -526,7 +567,35 @@ public class TextAdventure
 		}
 		if (isFull == true)
 		{
-			System.out.println("INVENTORY FULL");
+			System.out.println("ERROR INVENTORY FULL, PLEASE SELECT AN ITEM TO REPLACE");
+			System.out.println("\n[Inventory]");
+			System.out.println("{1} " + _inv1.getName() + " {2} " + _inv2.getName() + " {3} " + _inv3.getName() + "\n{4} " + _inv4.getName() + " {5} " + _inv5.getName() + " {6} DROP NEW ITEM");
+			
+			int invNum = input.nextInt();
+			boolean goBack = true;
+			boolean correctInput = false;
+			while (correctInput == false)
+			{
+				if (invNum <= 5 && invNum >= 1)
+				{
+					invNum = invNum -1;
+					invList.set(invNum, newItem);
+					correctInput = true;
+				}
+				else if (invNum == 6)
+				{
+					goBack = false;
+					System.out.println("DROPPING NEW ITEM");
+					correctInput = true;
+				}
+				else
+				{
+					System.out.println("Invalid input, please type the number assosiated with the action");
+					invNum = input.nextInt();
+				}
+			
+		
+			}
 		}
 	}
 	
@@ -575,12 +644,15 @@ public class TextAdventure
 		return monstAttack;
 	}
 	
-	public boolean fight(String monsterName, int monsterHealth, int monsterAttack, boolean monstBig)
+	public void fight(Monster monst)
 	{
-		boolean fight = false;
 		double critChance = currentWeapon.getCrit();
 		boolean actionTaken;
-		Monster monster = new Monster(monsterName, monsterHealth, monsterAttack, monstBig);
+		Monster monster = monst;
+		String monsterName = monster.getName();
+		int monsterAttack = monster.getattack();
+		int monsterHealth = monster.gethealth();
+		boolean monstBig = monster.getIsBig();
 		System.out.println(monsterName + " Goes in to fight!");
 		System.out.println("Your health: " + playerhealth);
 		System.out.println(monsterName + " health: " + monsterHealth);
@@ -627,17 +699,58 @@ public class TextAdventure
 			if(monstBig)
 			{
 				bigLoot();
+				bigWeapon();
 			}
 			else
 			{
 				smallLoot();
+				smallWeapon();
 			}
 		}
 		else
 		{
 			System.out.println("YOU HAVE DIED!");
 		}
-		return fight;
 	}
 	
+	public void randEvent()
+	{
+		Monster golbinWeak = new Monster("GOBLIN WEAKLING", 1, 1, false);
+		Monster golbinStrong = new Monster("GOLBLIN STRONG MAN", 40, 40, true);
+		Monster goblinElder = new Monster("GOBLIN ELDER", 50, 23, true);
+		Monster goblin = new Monster("GOBLIN", 20, 10, false);
+		Monster assassin = new Monster("ASSASSIN", 20, 75, true);
+		Monster bandit = new Monster("BANDIT", 15, 15, false);
+		Monster dragCultistRecruit = new Monster("DRAGON CULTIST RECRUIT", 20, 10, false);
+		Monster dragCulistStrong = new Monster("DRAGON CULTIST TANK", 70, 10, true);
+		Monster dragCultistElder = new Monster("DRAGON CULIST ELDER", 45, 30, true);
+		monstList.add(golbinWeak);
+		monstList.add(golbinStrong);
+		monstList.add(goblinElder);
+		monstList.add(goblin);
+		monstList.add(assassin);
+		monstList.add(bandit);
+		monstList.add(dragCultistRecruit);
+		monstList.add(dragCulistStrong);
+		monstList.add(dragCultistElder);
+		int rand = gameRandom(9);
+		rand = rand - 1;
+		
+		fight(monstList.get(rand));
+	}
+
+	public void dragLair()
+	{
+		System.out.println("You enter the Dragons Lair, thick slab walls cover the sides, and a boiling lava pit lays before you");
+		System.out.println("You look up to see that there are 4 floors that you have to go to to face the Dragon King");
+		System.out.println("As you walk in a guard comes into view");
+		Monster guard = new Monster("DRAGON GUARD", 50, 30, true);
+		fight(guard);
+		fight(guard);
+	}
+
+	public boolean getIsRunning()
+	{
+		return this.gameRunning;
+	}
 }
