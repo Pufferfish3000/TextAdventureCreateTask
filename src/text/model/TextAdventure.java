@@ -213,7 +213,7 @@ public class TextAdventure
 			}
 			else
 			{
-				System.out.println("INVAALID INPUT, PLEASE CHOOSE FROM THE AVAILABLE OPTIONS");
+				System.out.println("INVALID INPUT, PLEASE CHOOSE FROM THE AVAILABLE OPTIONS");
 			}
 		}
 	}
@@ -370,7 +370,7 @@ public class TextAdventure
 		
 		int chance = gameRandom(3);
 		
-		loot = lowItem.get(chance - 1);
+		loot = lowItem.get(chance);
 		
 		giveItem(loot);
 	}
@@ -389,7 +389,7 @@ public class TextAdventure
 		
 		int chance = gameRandom(3);
 		
-		loot = lowItem.get(chance - 1);
+		loot = lowItem.get(chance);
 		
 		giveItem(loot);
 		
@@ -410,7 +410,7 @@ public class TextAdventure
 		
 		int chance = gameRandom(3);
 		
-		loot = highWeap.get(chance - 1);
+		loot = highWeap.get(chance);
 		
 		//giveItem(loot);
 		
@@ -734,7 +734,6 @@ public class TextAdventure
 		monstList.add(dragCulistStrong);
 		monstList.add(dragCultistElder);
 		int rand = gameRandom(9);
-		rand = rand - 1;
 		
 		fight(monstList.get(rand));
 	}
