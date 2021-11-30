@@ -389,7 +389,7 @@ public class TextAdventure
 		
 		int chance = gameRandom(3);
 		
-		loot = lowItem.get(chance);
+		loot = highItem.get(chance);
 		
 		giveItem(loot);
 		
@@ -412,7 +412,7 @@ public class TextAdventure
 		
 		loot = highWeap.get(chance);
 		
-		//giveItem(loot);
+		giveWeapon(loot);
 		
 	}
 	
@@ -432,7 +432,7 @@ public class TextAdventure
 		
 		loot = lowWeap.get(chance - 1);
 		
-		//giveWeapon(loot);
+		giveWeapon(loot);
 		
 	}
 	
@@ -696,16 +696,7 @@ public class TextAdventure
 		if (monsterHealth < 0)
 		{
 			System.out.println(monsterName + " DIES");
-			if(monstBig)
-			{
-				bigLoot();
-				bigWeapon();
-			}
-			else
-			{
-				smallLoot();
-				smallWeapon();
-			}
+			monsterLoot(monstBig);
 		}
 		else
 		{
@@ -715,6 +706,8 @@ public class TextAdventure
 	
 	public void randEvent()
 	{
+		
+		int random = gameRandom(5);
 		Monster golbinWeak = new Monster("GOBLIN WEAKLING", 1, 1, false);
 		Monster golbinStrong = new Monster("GOLBLIN STRONG MAN", 40, 40, true);
 		Monster goblinElder = new Monster("GOBLIN ELDER", 50, 23, true);
@@ -734,8 +727,10 @@ public class TextAdventure
 		monstList.add(dragCulistStrong);
 		monstList.add(dragCultistElder);
 		int rand = gameRandom(9);
-		
-		fight(monstList.get(rand));
+		if (random > 3)
+		{
+			fight(monstList.get(rand));	
+		}
 	}
 
 	public void dragLair()
@@ -752,4 +747,10 @@ public class TextAdventure
 	{
 		return this.gameRunning;
 	}
+
+	public void significantPlace()
+	{
+		
+	}
+
 }
