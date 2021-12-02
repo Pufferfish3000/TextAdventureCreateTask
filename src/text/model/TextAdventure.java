@@ -491,8 +491,10 @@ public class TextAdventure
 	public void giveWeapon(Weapon newWeapon)
 	{
 		boolean correctInput = true;
+		System.out.println();
 		System.out.println("DO YOU WISH TO REPLACE YOUR CURRENT WEAPON?");
 		System.out.println("CURRENT WEAPON: " + currentWeapon.toString());
+		System.out.println();
 		System.out.println("NEW WEAPON: " + newWeapon.toString());
 		System.out.println("{1} YES  {2} NO");
 		while (correctInput)
@@ -514,6 +516,7 @@ public class TextAdventure
 				System.out.println("INVALID INPUT PLEASE TRY AGAIN");
 			}
 		}
+		System.out.println();
 	}
 	
 	public void giveItem(String ItemName, String description, int stats)
@@ -524,6 +527,7 @@ public class TextAdventure
 		newItem.setStats(stats);
 		newItem.setName(ItemName);
 		newItem.setDescription(description);
+		System.out.println("New Item: " + newItem.toString());
 		while (i < 6)
 		{
 			Item currentItem = invList.get(i);
@@ -552,6 +556,8 @@ public class TextAdventure
 		Item newItem = givenItem;
 		boolean isFull = true;
 		int i = 0;
+		
+		System.out.println("New Item: " + newItem.toString());
 		
 		while (i < 5)
 		{
