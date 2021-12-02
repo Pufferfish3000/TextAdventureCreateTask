@@ -152,7 +152,7 @@ public class TextAdventure
 	public void playerMove()
 	{
 		showMap();
-		
+		System.out.println(playerPosition[0] + ", " + playerPosition[1]);
 		System.out.println("[MOVEMENT]");
 		if (canMoveUp())
 		{
@@ -236,7 +236,7 @@ public class TextAdventure
 	
 	public boolean canMoveDown()
 	{	
-		if (playerPosition[1] != 6)
+		if (playerPosition[1] != 9)
 		{
 			return true;
 		}
@@ -553,7 +553,7 @@ public class TextAdventure
 		boolean isFull = true;
 		int i = 0;
 		
-		while (i < 6)
+		while (i < 5)
 		{
 			Item currentItem = invList.get(i);
 			if (currentItem.getName().equalsIgnoreCase("nothing"))
@@ -741,6 +741,15 @@ public class TextAdventure
 		Monster guard = new Monster("DRAGON GUARD", 50, 30, true);
 		fight(guard);
 		fight(guard);
+		System.out.println("You ascend the staircase and search for the dragon lord, but are interupted by the top cultists");
+		Monster highCult = new Monster("DRAGON CULTEST COMMANDER", 100, 50, true);
+		fight(highCult);
+		fight(highCult);
+		fight(highCult);
+		fight(highCult);
+		System.out.println("As you ascend to the final stage, you see the leader, he looks very weak and fragile for all he has done");
+		Monster boss = new Monster("DRAGON CULTIST CHEIF", 1, 1, true);
+		fight(boss);
 	}
 
 	public boolean getIsRunning()
@@ -750,7 +759,10 @@ public class TextAdventure
 
 	public void significantPlace()
 	{
-		
+		if (playerPosition[1] == 9 && playerPosition[0] == 9)
+		{
+			dragLair();
+		}
 	}
 
 }

@@ -17,6 +17,7 @@ public class Controller
 			game.playerMove();
 			game.randEvent();
 			game.significantPlace();
+			System.out.println();
 		}
 	}
 }
